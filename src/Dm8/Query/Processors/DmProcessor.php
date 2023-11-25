@@ -19,25 +19,25 @@ class DmProcessor extends Processor
      * @param  string  $sequence
      * @return int
      */
-    public function processInsertGetId(Builder $query, $sql, $values, $sequence = null)
-    {
-        $connection = $query->getConnection();
-
-        $connection->recordsHaveBeenModified();
-        $start = microtime(true);
-
-        $id = 0;
-        $parameter = 1;
-        $statement = $this->prepareStatement($query, $sql);
-        $values = $this->incrementBySequence($values, $sequence);
-        $parameter = $this->bindValues($values, $statement, $parameter);
-        $statement->bindParam($parameter, $id, PDO::PARAM_INT, -1);
-        $statement->execute();
-
-        $connection->logQuery($sql, $values, $start);
-
-        return (int) $id;
-    }
+    // public function processInsertGetId(Builder $query, $sql, $values, $sequence = null)
+    // {
+    //     $connection = $query->getConnection();
+    //
+    //     $connection->recordsHaveBeenModified();
+    //     $start = microtime(true);
+    //
+    //     $id = 0;
+    //     $parameter = 1;
+    //     $statement = $this->prepareStatement($query, $sql);
+    //     $values = $this->incrementBySequence($values, $sequence);
+    //     $parameter = $this->bindValues($values, $statement, $parameter);
+    //     $statement->bindParam($parameter, $id, PDO::PARAM_INT, -1);
+    //     $statement->execute();
+    //
+    //     $connection->logQuery($sql, $values, $start);
+    //
+    //     return (int) $id;
+    // }
 
     /**
      * Get prepared statement.
