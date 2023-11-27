@@ -14,29 +14,29 @@ class DmBuilder extends Builder
      * @param  array  $columns
      * @return array
      */
-    protected function runPaginationCountQuery($columns = ['*'])
-    {
-        if ($this->groups || $this->havings) {
-            $clone = $this->cloneForPaginationCount();
-
-            if (is_null($clone->columns) && ! empty($this->joins)) {
-                $clone->select($this->from.'.*');
-            }
-
-            return $this->newQuery()
-                ->from(new Expression('('.$clone->toSql().')'))
-                ->mergeBindings($clone)
-                ->setAggregate('count', $this->withoutSelectAliases($columns))
-                ->get()->all();
-        }
-
-        $without = $this->unions ? ['orders', 'limit', 'offset'] : ['columns', 'orders', 'limit', 'offset'];
-
-        return $this->cloneWithout($without)
-            ->cloneWithoutBindings($this->unions ? ['order'] : ['select', 'order'])
-            ->setAggregate('count', $this->withoutSelectAliases($columns))
-            ->get()->all();
-    }
+    // protected function runPaginationCountQuery($columns = ['*'])
+    // {
+    //     if ($this->groups || $this->havings) {
+    //         $clone = $this->cloneForPaginationCount();
+    //
+    //         if (is_null($clone->columns) && ! empty($this->joins)) {
+    //             $clone->select($this->from.'.*');
+    //         }
+    //
+    //         return $this->newQuery()
+    //             ->from(new Expression('('.$clone->toSql().')'))
+    //             ->mergeBindings($clone)
+    //             ->setAggregate('count', $this->withoutSelectAliases($columns))
+    //             ->get()->all();
+    //     }
+    //
+    //     $without = $this->unions ? ['orders', 'limit', 'offset'] : ['columns', 'orders', 'limit', 'offset'];
+    //
+    //     return $this->cloneWithout($without)
+    //         ->cloneWithoutBindings($this->unions ? ['order'] : ['select', 'order'])
+    //         ->setAggregate('count', $this->withoutSelectAliases($columns))
+    //         ->get()->all();
+    // }
 
     /**
      * Get the count of the total records for the paginator.
