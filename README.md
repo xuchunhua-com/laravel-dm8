@@ -1,5 +1,7 @@
 # DM DB driver for Laravel 4|5|6|7|8|9 via DM8
 
+> This project modified something to fit Laravel，close to mysql;
+
 ## Laravel-DM8
 
 Laravel-DM8 is an Dm Database Driver package for [Laravel](http://laravel.com/). Laravel-DM8 is an extension of [Illuminate/Database](https://github.com/illuminate/database) that uses [DM8](https://eco.dameng.com/document/dm/zh-cn/faq/faq-php.html#PHP-Startup-Unable-to-load-dynamic-library) extension to communicate with Dm. Thanks to @yajra.
