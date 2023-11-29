@@ -233,7 +233,7 @@ class DmGrammar extends Grammar
         $tableName = $this->wrap($this->tablePrefix.$table, true);
         $segments = explode(' ', $table);
         if (count($segments) > 1) {
-            $tableName = $this->wrap($this->tablePrefix.$segments[0]).' '.$segments[1];
+            $tableName = $this->wrap($this->tablePrefix.$segments[0]).' ' . $this->tablePrefix . $segments[1];
         }
 
         return $this->getSchemaPrefix().$tableName;

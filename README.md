@@ -1,6 +1,9 @@
 # DM DB driver for Laravel 4|5|6|7|8|9 via DM8
 
-> This project modified something to fit Laravel，close to mysql;
+> 修改部分适配 Laravel  
+> 1. 适配 InsertGetId 
+> 2. 修复 DmBuilder 中 DmAutoIncrementHelper 引用
+> 3. 适配 withCount, 主要是 x_table as y 情况 前缀补充，原包，没有在 y 前面追加前缀，和 Laravel 不兼容
 
 ## Laravel-DM8
 
