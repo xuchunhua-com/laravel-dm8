@@ -452,23 +452,23 @@ class Dm8Connection extends Connection
     }
 
     /**
-     * Set oracle NLS session to case insensitive search & sort.
+     * Set dm NLS session to case insensitive search & sort.
      *
      * @return $this
      */
     public function useCaseInsensitiveSession()
     {
-        return $this->setSessionVars(['NLS_COMP' => 'LINGUISTIC', 'NLS_SORT' => 'BINARY_CI']);
+        return $this->setSessionVars(['CASE_SENSITIVE' => 'FALSE']);
     }
 
     /**
-     * Set oracle NLS session to case sensitive search & sort.
+     * Set dm NLS session to case sensitive search & sort.
      *
      * @return $this
      */
     public function useCaseSensitiveSession()
     {
-        return $this->setSessionVars(['NLS_COMP' => 'BINARY', 'NLS_SORT' => 'BINARY']);
+        return $this->setSessionVars(['CASE_SENSITIVE' => 'TRUE']);
     }
 
     /**
