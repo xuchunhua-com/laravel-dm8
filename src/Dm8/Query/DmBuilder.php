@@ -263,4 +263,27 @@ class DmBuilder extends Builder
     {
         return clone $this;
     }
+
+
+    /**
+     * Add a new "raw" select expression to the query.
+     * 达梦函数转化
+     *
+     * @param  string  $expression
+     * @param  array  $bindings
+     * @return $this
+     */
+    public function selectRaw($expression, array $bindings = [])
+    {
+        if (strpos(strtolower($expression), ' group_concat(') !== false) {
+            $expression = str_replace(' group_concat(', ' wm_concat(', $expression);
+        }
+        $this->addSelect(new Expression($expression));
+
+        if ($bindings) {
+            $this->addBinding($bindings, 'select');
+        }
+
+        return $this;
+    }
 }
