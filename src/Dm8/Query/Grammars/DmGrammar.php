@@ -590,4 +590,24 @@ class DmGrammar extends Grammar
 
         return $sql.' from ('.$this->compileSelect($query).') '.$this->wrapTable('temp_table');
     }
+
+    /**
+     * Prepare the bindings for an update statement.
+     *
+     * Booleans, integers, and doubles are inserted into JSON updates as raw values.
+     *
+     * @param  array  $bindings
+     * @param  array  $values
+     * @return array
+     */
+    public function prepareBindingsForUpdate(array $bindings, array $values)
+    {
+        $values = collect($values)->reject(function ($value, $column) {
+            return $this->isJsonSelector($column) && is_bool($value);
+        })->map(function ($value) {
+            return is_array($value) ? json_encode($value) : $value;
+        })->all();
+
+        return parent::prepareBindingsForUpdate($bindings, $values);
+    }
 }
