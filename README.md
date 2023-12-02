@@ -36,7 +36,7 @@ Laravel-DM8 is an Dm Database Driver package for [Laravel](http://laravel.com/).
 ## Quick Installation
 
 ```bash
-composer require jackfinal/laravel-dm8
+composer require maxlcoder/laravel-dm8
 ```
 
 ## Service Provider (Optional on Laravel 5.5+)
