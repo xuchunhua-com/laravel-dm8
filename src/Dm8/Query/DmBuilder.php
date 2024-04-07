@@ -151,15 +151,20 @@ class DmBuilder extends Builder
      */
     protected function runSelect()
     {
+        $expression = strtolower($this->toSql());
+        if (strpos($expression, ' group_concat(') !== false) {
+            $expression = str_replace(' group_concat(', ' wm_concat(', $expression);
+        }
+
         if ($this->lock) {
             $this->connection->beginTransaction();
-            $result = $this->connection->select($this->toSql(), $this->getBindings(), ! $this->useWritePdo);
+            $result = $this->connection->select($expression, $this->getBindings(), ! $this->useWritePdo);
             $this->connection->commit();
 
             return $result;
         }
 
-        return $this->connection->select($this->toSql(), $this->getBindings(), ! $this->useWritePdo);
+        return $this->connection->select($$expression, $this->getBindings(), ! $this->useWritePdo);
     }
 
     /**
@@ -275,7 +280,8 @@ class DmBuilder extends Builder
      */
     public function selectRaw($expression, array $bindings = [])
     {
-        if (strpos(strtolower($expression), ' group_concat(') !== false) {
+        $expression = strtolower($expression);
+        if (strpos($expression, ' group_concat(') !== false) {
             $expression = str_replace(' group_concat(', ' wm_concat(', $expression);
         }
         $this->addSelect(new Expression($expression));
