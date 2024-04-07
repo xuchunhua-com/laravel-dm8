@@ -164,7 +164,7 @@ class DmBuilder extends Builder
             return $result;
         }
 
-        return $this->connection->select($$expression, $this->getBindings(), ! $this->useWritePdo);
+        return $this->connection->select($expression, $this->getBindings(), ! $this->useWritePdo);
     }
 
     /**
