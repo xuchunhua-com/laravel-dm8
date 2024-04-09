@@ -31,12 +31,12 @@ class Dm8Connection extends Connection
     protected $schema;
 
     /**
-     * @var \Yajra\Oci8\Schema\Sequence
+     * @var \LaravelDm8\Dm8\Schema\Sequence
      */
     protected $sequence;
 
     /**
-     * @var \Yajra\Oci8\Schema\Trigger
+     * @var \LaravelDm8\Dm8\Schema\Trigger
      */
     protected $trigger;
 
@@ -107,7 +107,7 @@ class Dm8Connection extends Connection
     /**
      * Get sequence class.
      *
-     * @return \Yajra\Oci8\Schema\Sequence
+     * @return \LaravelDm8\Dm8\Schema\Sequence
      */
     public function getSequence()
     {
@@ -117,8 +117,8 @@ class Dm8Connection extends Connection
     /**
      * Set sequence class.
      *
-     * @param  \Yajra\Oci8\Schema\Sequence  $sequence
-     * @return \Yajra\Oci8\Schema\Sequence
+     * @param  \LaravelDm8\Dm8\Schema\Sequence  $sequence
+     * @return \LaravelDm8\Dm8\Schema\Sequence
      */
     public function setSequence(Sequence $sequence)
     {
@@ -138,8 +138,8 @@ class Dm8Connection extends Connection
     /**
      * Set oracle trigger class.
      *
-     * @param  \Yajra\Oci8\Schema\Trigger  $trigger
-     * @return \Yajra\Oci8\Schema\Trigger
+     * @param  \LaravelDm8\Dm8\Schema\Trigger  $trigger
+     * @return \LaravelDm8\Dm8\Schema\Trigger
      */
     public function setTrigger(Trigger $trigger)
     {
@@ -191,11 +191,11 @@ class Dm8Connection extends Connection
     /**
      * Get doctrine driver.
      *
-     * @return \Doctrine\DBAL\Driver\OCI8\Driver|\Yajra\Oci8\PDO\Oci8Driver
+     * @return \Doctrine\DBAL\Driver\OCI8\Driver|\LaravelDm8\Dm8\PDO\DmDriver
      */
     protected function getDoctrineDriver()
     {
-        return class_exists(Version::class) ? new DoctrineDriver : new Oci8Driver();
+        return class_exists(Version::class) ? new DoctrineDriver : new DmDriver();
     }
 
     /**
@@ -326,7 +326,7 @@ class Dm8Connection extends Connection
     /**
      * Get the default query grammar instance.
      *
-     * @return \Illuminate\Database\Grammar|\Yajra\Oci8\Query\Grammars\OracleGrammar
+     * @return \Illuminate\Database\Grammar|\LaravelDm8\Dm8\Query\Grammars\DmGrammar
      */
     protected function getDefaultQueryGrammar()
     {
@@ -336,7 +336,7 @@ class Dm8Connection extends Connection
     /**
      * Set the table prefix and return the grammar.
      *
-     * @param  \Illuminate\Database\Grammar|\Yajra\Oci8\Query\Grammars\OracleGrammar|\Yajra\Oci8\Schema\Grammars\OracleGrammar  $grammar
+     * @param  \Illuminate\Database\Grammar|\LaravelDm8\Dm8\Query\Grammars\DmGrammar|\LaravelDm8\Dm8\Schema\Grammars\DmGrammar  $grammar
      * @return \Illuminate\Database\Grammar
      */
     public function withTablePrefix(Grammar $grammar)
@@ -347,7 +347,7 @@ class Dm8Connection extends Connection
     /**
      * Set the schema prefix and return the grammar.
      *
-     * @param  \Illuminate\Database\Grammar|\Yajra\Oci8\Query\Grammars\OracleGrammar|\Yajra\Oci8\Schema\Grammars\OracleGrammar  $grammar
+     * @param  \Illuminate\Database\Grammar|\LaravelDm8\Dm8\Query\Grammars\DmGrammar|\LaravelDm8\Dm8\Schema\Grammars\DmGrammar  $grammar
      * @return \Illuminate\Database\Grammar
      */
     public function withSchemaPrefix(Grammar $grammar)
@@ -370,7 +370,7 @@ class Dm8Connection extends Connection
     /**
      * Get the default schema grammar instance.
      *
-     * @return \Illuminate\Database\Grammar|\Yajra\Oci8\Schema\Grammars\OracleGrammar
+     * @return \Illuminate\Database\Grammar|\LaravelDm8\Dm8\Schema\Grammars\DmGrammar
      */
     protected function getDefaultSchemaGrammar()
     {
@@ -380,7 +380,7 @@ class Dm8Connection extends Connection
     /**
      * Get the default post processor instance.
      *
-     * @return \Yajra\Oci8\Query\Processors\OracleProcessor
+     * @return \LaravelDm8\Dm8\Query\Processors\DmProcessor
      */
     protected function getDefaultPostProcessor()
     {

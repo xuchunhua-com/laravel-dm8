@@ -48,7 +48,7 @@ class DmProcessor extends Processor
      */
     private function prepareStatement(Builder $query, $sql)
     {
-        /** @var \Yajra\Oci8\Oci8Connection $connection */
+        /** @var \LaravelDm8\Dm8\Dm8Connection $connection */
         $connection = $query->getConnection();
         $pdo = $connection->getPdo();
 
@@ -69,9 +69,9 @@ class DmProcessor extends Processor
 
         if (! isset($builderArgs[1][0][$sequence])) {
             if ($builder instanceof EloquentBuilder) {
-                /** @var \Yajra\Oci8\Eloquent\OracleEloquent $model */
+                /** @var \LaravelDm8\Dm8\Eloquent\DmEloquent $model */
                 $model = $builder->getModel();
-                /** @var \Yajra\Oci8\Oci8Connection $connection */
+                /** @var \LaravelDm8\Dm8\Dm8Connection $connection */
                 $connection = $model->getConnection();
                 if ($model->sequence && $model->incrementing) {
                     $values[] = (int) $connection->getSequence()->nextValue($model->sequence);

@@ -11,7 +11,7 @@ class Trigger
     use Dm8ReservedWords;
 
     /**
-     * @var \Illuminate\Database\Connection|\Yajra\Oci8\Oci8Connection
+     * @var \Illuminate\Database\Connection|\LaravelDm8\Dm8\Dm8Connection
      */
     protected $connection;
 

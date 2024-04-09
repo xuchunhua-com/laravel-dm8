@@ -26,9 +26,9 @@ class Comment extends Grammar
     /**
      * Set table and column comments.
      *
-     * @param  \Yajra\Oci8\Schema\OracleBlueprint  $blueprint
+     * @param  \LaravelDm8\Dm8\Schema\DmBlueprint  $blueprint
      */
-    public function setComments(OracleBlueprint $blueprint)
+    public function setComments(DmBlueprint $blueprint)
     {
         $this->commentTable($blueprint);
 
@@ -41,9 +41,9 @@ class Comment extends Grammar
      * Run the comment on table statement.
      * Comment set by $table->comment = 'comment';.
      *
-     * @param  \Yajra\Oci8\Schema\OracleBlueprint  $blueprint
+     * @param  \LaravelDm8\Dm8\Schema\DmBlueprint  $blueprint
      */
-    private function commentTable(OracleBlueprint $blueprint)
+    private function commentTable(DmBlueprint $blueprint)
     {
         $table = $this->wrapValue($blueprint->getTable());
 
@@ -67,9 +67,9 @@ class Comment extends Grammar
      * Add comments set via fluent setter.
      * Comments set by $table->string('column')->comment('comment');.
      *
-     * @param  \Yajra\Oci8\Schema\OracleBlueprint  $blueprint
+     * @param  \LaravelDm8\Dm8\Schema\DmBlueprint  $blueprint
      */
-    private function fluentComments(OracleBlueprint $blueprint)
+    private function fluentComments(DmBlueprint $blueprint)
     {
         foreach ($blueprint->getColumns() as $column) {
             if (isset($column['comment'])) {
@@ -98,9 +98,9 @@ class Comment extends Grammar
      * Add comments on columns.
      * Comments set by $table->commentColumns = ['column' => 'comment'];.
      *
-     * @param  \Yajra\Oci8\Schema\OracleBlueprint  $blueprint
+     * @param  \LaravelDm8\Dm8\Schema\DmBlueprint  $blueprint
      */
-    private function commentColumns(OracleBlueprint $blueprint)
+    private function commentColumns(DmBlueprint $blueprint)
     {
         foreach ($blueprint->commentColumns as $column => $comment) {
             $this->commentColumn($blueprint->getTable(), $column, $comment);

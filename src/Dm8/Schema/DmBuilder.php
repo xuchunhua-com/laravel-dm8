@@ -9,12 +9,12 @@ use Illuminate\Database\Schema\Builder;
 class DmBuilder extends Builder
 {
     /**
-     * @var \Yajra\Oci8\Schema\OracleAutoIncrementHelper
+     * @var \LaravelDm8\Dm8\Schema\DmAutoIncrementHelper
      */
     public $helper;
 
     /**
-     * @var \Yajra\Oci8\Schema\Comment
+     * @var \LaravelDm8\Dm8\Schema\Comment
      */
     public $comment;
 
@@ -131,7 +131,7 @@ class DmBuilder extends Builder
      */
     public function hasTable($table)
     {
-        /** @var \Yajra\Oci8\Schema\Grammars\OracleGrammar $grammar */
+        /** @var \LaravelDm8\Dm8\Schema\Grammars\DmGrammar $grammar */
         $grammar = $this->grammar;
         $sql = $grammar->compileTableExists();
 
@@ -154,7 +154,7 @@ class DmBuilder extends Builder
     {
         $database = $this->connection->getConfig('username');
         $table = $this->connection->getTablePrefix().$table;
-        /** @var \Yajra\Oci8\Schema\Grammars\OracleGrammar $grammar */
+        /** @var \LaravelDm8\Dm8\Schema\Grammars\DmGrammar $grammar */
         $grammar = $this->grammar;
         $results = $this->connection->select($grammar->compileColumnExists($database, $table));
 
