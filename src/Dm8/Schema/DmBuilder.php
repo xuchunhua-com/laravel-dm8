@@ -59,7 +59,7 @@ class DmBuilder extends Builder
      */
     protected function createBlueprint($table, Closure $callback = null)
     {
-        $blueprint = new OracleBlueprint($table, $callback);
+        $blueprint = new DmBlueprint($table, $callback);
         $blueprint->setTablePrefix($this->connection->getTablePrefix());
 
         return $blueprint;
