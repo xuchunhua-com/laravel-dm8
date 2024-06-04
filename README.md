@@ -1,5 +1,7 @@
 # DM DB driver for Laravel 4|5|6|7|8|9 via DM8
 
+## 推荐更新版本到 1.0.14 
+
 > 修改部分适配 Laravel  
 > 1. 适配 InsertGetId 
 > 2. 修复 DmBuilder 中 DmAutoIncrementHelper 引用
