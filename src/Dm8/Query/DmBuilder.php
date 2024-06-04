@@ -151,9 +151,12 @@ class DmBuilder extends Builder
      */
     protected function runSelect()
     {
-        $expression = strtolower($this->toSql());
+        $expression = $this->toSql();
         if (strpos($expression, ' group_concat(') !== false) {
             $expression = str_replace(' group_concat(', ' wm_concat(', $expression);
+        }
+        if (strpos($expression, ' GROUP_CONCAT(') !== false) {
+            $expression = str_replace(' GROUP_CONCAT(', ' WM_CONCAT(', $expression);
         }
 
         if ($this->lock) {
