@@ -280,9 +280,11 @@ class DmBuilder extends Builder
      */
     public function selectRaw($expression, array $bindings = [])
     {
-        $expression = strtolower($expression);
         if (strpos($expression, ' group_concat(') !== false) {
             $expression = str_replace(' group_concat(', ' wm_concat(', $expression);
+        }
+        if (strpos($expression, ' GROUP_CONCAT(') !== false) {
+            $expression = str_replace(' GROUP_CONCAT(', ' WM_CONCAT(', $expression);
         }
         $this->addSelect(new Expression($expression));
 
