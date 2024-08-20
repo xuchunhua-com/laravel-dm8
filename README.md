@@ -1,5 +1,9 @@
 # DM DB driver for Laravel 4|5|6|7|8|9 via DM8
 
+## 查询写法
+> 1. 使用 `selectRaw` 或者 `DB::raw` 函数查询时，如果当前数据库是忽略大小写的，一律返回小写字段名，
+
+
 ## 推荐更新版本到 1.0.14 
 
 > 修改部分适配 Laravel  
@@ -8,6 +12,7 @@
 > 3. 适配 withCount, 主要是 x_table as y 情况 前缀补充，原包，没有在 y 前面追加前缀，和 Laravel 不兼容
 > 4. 适配 cast json ，数组参数转 json 入库
 > 5. 兼容 mysql group_concat 函数，内部转化为 wm_concat 函数
+> 6. 修复表单验证中 exists 和 unique，去除对 getCount 和 getMultiCount 的重写。原包是对 oracle 进行大小写不敏感设置，但是达梦数据库不支持
 
 ## Laravel-DM8
 

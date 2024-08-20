@@ -18,20 +18,20 @@ class Dm8DatabasePresenceVerifier extends DatabasePresenceVerifier
      * @param  array  $extra
      * @return int
      */
-    public function getCount($collection, $column, $value, $excludeId = null, $idColumn = null, array $extra = [])
-    {
-        $connection = $this->table($collection)->getConnection();
-
-        if (! $connection instanceof Dm8Connection) {
-            return parent::getCount($collection, $column, $value, $excludeId, $idColumn, $extra);
-        }
-
-        $connection->useCaseInsensitiveSession();
-        $count = parent::getCount($collection, $column, $value, $excludeId, $idColumn, $extra);
-        $connection->useCaseSensitiveSession();
-
-        return $count;
-    }
+//    public function getCount($collection, $column, $value, $excludeId = null, $idColumn = null, array $extra = [])
+//    {
+//        $connection = $this->table($collection)->getConnection();
+//
+//        if (! $connection instanceof Dm8Connection) {
+//            return parent::getCount($collection, $column, $value, $excludeId, $idColumn, $extra);
+//        }
+//
+//        $connection->useCaseInsensitiveSession();
+//        $count = parent::getCount($collection, $column, $value, $excludeId, $idColumn, $extra);
+//        $connection->useCaseSensitiveSession();
+//
+//        return $count;
+//    }
 
     /**
      * Count the number of objects in a collection with the given values.
@@ -42,18 +42,18 @@ class Dm8DatabasePresenceVerifier extends DatabasePresenceVerifier
      * @param  array  $extra
      * @return int
      */
-    public function getMultiCount($collection, $column, array $values, array $extra = [])
-    {
-        $connection = $this->table($collection)->getConnection();
-
-        if (! $connection instanceof Dm8Connection) {
-            return parent::getMultiCount($collection, $column, $values, $extra);
-        }
-
-        $connection->useCaseInsensitiveSession();
-        $count = parent::getMultiCount($collection, $column, $values, $extra);
-        $connection->useCaseSensitiveSession();
-
-        return $count;
-    }
+//    public function getMultiCount($collection, $column, array $values, array $extra = [])
+//    {
+//        $connection = $this->table($collection)->getConnection();
+//
+//        if (! $connection instanceof Dm8Connection) {
+//            return parent::getMultiCount($collection, $column, $values, $extra);
+//        }
+//
+//        $connection->useCaseInsensitiveSession();
+//        $count = parent::getMultiCount($collection, $column, $values, $extra);
+//        $connection->useCaseSensitiveSession();
+//
+//        return $count;
+//    }
 }
