@@ -454,6 +454,23 @@ class DmGrammar extends Grammar
         return (array) $rs;
     }
 
+
+    /**
+     * Compile a table comment command.
+     *
+     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+     * @param  \Illuminate\Support\Fluent  $command
+     * @return string
+     */
+    public function compileTableComment(Blueprint $blueprint, Fluent $command)
+    {
+        return sprintf('COMMENT ON TABLE %s is %s',
+            $this->wrapTable($blueprint),
+            "'".str_replace("'", "''", $command->comment)."'"
+        );
+    }
+
+
     /**
      * Create the column definition for a char type.
      *
@@ -528,9 +545,7 @@ class DmGrammar extends Grammar
      */
     protected function typeInteger(Fluent $column)
     {
-        $length = ($column->length) ? $column->length : 10;
-
-        return "number({$length},0)";
+        return 'int';
     }
 
     /**
@@ -541,9 +556,7 @@ class DmGrammar extends Grammar
      */
     protected function typeBigInteger(Fluent $column)
     {
-        $length = ($column->length) ? $column->length : 19;
-
-        return "number({$length},0)";
+        return 'bigint';
     }
 
     /**
@@ -813,6 +826,7 @@ class DmGrammar extends Grammar
     {
         if (in_array($column->type, $this->serials) && $column->autoIncrement) {
             $blueprint->primary($column->name);
+            return ' auto_increment';
         }
     }
 

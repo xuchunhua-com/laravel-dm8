@@ -47,7 +47,7 @@ class DmBuilder extends Builder
 
         $this->comment->setComments($blueprint);
 
-        $this->helper->createAutoIncrementObjects($blueprint, $table);
+        // $this->helper->createAutoIncrementObjects($blueprint, $table);
     }
 
     /**
