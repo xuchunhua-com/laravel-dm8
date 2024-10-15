@@ -13,6 +13,7 @@
 > 4. 适配 cast json ，数组参数转 json 入库
 > 5. 兼容 mysql group_concat 函数，内部转化为 wm_concat 函数
 > 6. 修复表单验证中 exists 和 unique，去除对 getCount 和 getMultiCount 的重写。原包是对 oracle 进行大小写不敏感设置，但是达梦数据库不支持
+> 7. 修复自动递增，匹配 laravel migration。原包中将 migration 中的 int 和 bigint 均转化为 number 无法使 auto_increment 生效
 
 ## Laravel-DM8
 
