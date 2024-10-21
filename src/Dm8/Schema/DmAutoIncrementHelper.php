@@ -105,6 +105,7 @@ class DmAutoIncrementHelper
      */
     public function dropAutoIncrementObjects($table)
     {
+        return true;
         // drop sequence and trigger object
         $prefix = $this->connection->getTablePrefix();
         // get the actual primary column name from table
