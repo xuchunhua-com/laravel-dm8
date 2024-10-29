@@ -567,9 +567,7 @@ class DmGrammar extends Grammar
      */
     protected function typeMediumInteger(Fluent $column)
     {
-        $length = ($column->length) ? $column->length : 7;
-
-        return "number({$length},0)";
+        return 'int';
     }
 
     /**
@@ -580,9 +578,7 @@ class DmGrammar extends Grammar
      */
     protected function typeSmallInteger(Fluent $column)
     {
-        $length = ($column->length) ? $column->length : 5;
-
-        return "number({$length},0)";
+        return 'smallint';
     }
 
     /**
@@ -593,9 +589,7 @@ class DmGrammar extends Grammar
      */
     protected function typeTinyInteger(Fluent $column)
     {
-        $length = ($column->length) ? $column->length : 3;
-
-        return "number({$length},0)";
+        return 'tinyint';
     }
 
     /**
@@ -606,7 +600,7 @@ class DmGrammar extends Grammar
      */
     protected function typeFloat(Fluent $column)
     {
-        return "number({$column->total}, {$column->places})";
+        return $this->typeDouble($column);
     }
 
     /**
@@ -617,7 +611,11 @@ class DmGrammar extends Grammar
      */
     protected function typeDouble(Fluent $column)
     {
-        return "number({$column->total}, {$column->places})";
+        if ($column->total && $column->places) {
+            return "double({$column->total}, {$column->places})";
+        }
+
+        return 'double';
     }
 
     /**
@@ -628,7 +626,7 @@ class DmGrammar extends Grammar
      */
     protected function typeDecimal(Fluent $column)
     {
-        return "number({$column->total}, {$column->places})";
+        return "decimal({$column->total}, {$column->places})";
     }
 
     /**
@@ -639,7 +637,7 @@ class DmGrammar extends Grammar
      */
     protected function typeBoolean(Fluent $column)
     {
-        return 'char(1)';
+        return 'tinyint(1)';
     }
 
     /**
