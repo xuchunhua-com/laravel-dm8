@@ -57,7 +57,7 @@ class DmGrammar extends Grammar
     {
         $columns = implode(', ', $this->getColumns($blueprint));
 
-        $sql = 'create table '.$this->wrapTable($blueprint)." ( $columns";
+        $sql = 'create table ' . $this->wrapTable($blueprint) . " ( $columns";
 
         /*
          * To be able to name the primary/foreign keys when the table is
@@ -82,7 +82,7 @@ class DmGrammar extends Grammar
      */
     public function wrapTable($table)
     {
-        return $this->getSchemaPrefix().parent::wrapTable($table);
+        return $this->getSchemaPrefix() . parent::wrapTable($table);
     }
 
     /**
@@ -92,7 +92,7 @@ class DmGrammar extends Grammar
      */
     public function getSchemaPrefix()
     {
-        return ! empty($this->schema_prefix) ? $this->schema_prefix.'.' : '';
+        return ! empty($this->schema_prefix) ? $this->schema_prefix . '.' : '';
     }
 
     /**
@@ -192,7 +192,7 @@ class DmGrammar extends Grammar
     {
         $columns = implode(', ', $this->getColumns($blueprint));
 
-        $sql = 'alter table '.$this->wrapTable($blueprint)." add ( $columns";
+        $sql = 'alter table ' . $this->wrapTable($blueprint) . " add ( $columns";
 
         $sql .= (string) $this->addPrimaryKeys($blueprint);
 
@@ -286,7 +286,7 @@ class DmGrammar extends Grammar
      */
     public function compileIndex(Blueprint $blueprint, Fluent $command)
     {
-        return "create index {$command->index} on ".$this->wrapTable($blueprint).' ( '.$this->columnize($command->columns).' )';
+        return "create index {$command->index} on " . $this->wrapTable($blueprint) . ' ( ' . $this->columnize($command->columns) . ' )';
     }
 
     /**
@@ -298,7 +298,7 @@ class DmGrammar extends Grammar
      */
     public function compileDrop(Blueprint $blueprint, Fluent $command)
     {
-        return 'drop table '.$this->wrapTable($blueprint);
+        return 'drop table ' . $this->wrapTable($blueprint);
     }
 
     /**
@@ -353,7 +353,7 @@ class DmGrammar extends Grammar
 
         $table = $this->wrapTable($blueprint);
 
-        return 'alter table '.$table.' drop ( '.implode(', ', $columns).' )';
+        return 'alter table ' . $table . ' drop ( ' . implode(', ', $columns) . ' )';
     }
 
     /**
@@ -433,7 +433,7 @@ class DmGrammar extends Grammar
     {
         $from = $this->wrapTable($blueprint);
 
-        return "alter table {$from} rename to ".$this->wrapTable($command->to);
+        return "alter table {$from} rename to " . $this->wrapTable($command->to);
     }
 
     /**
@@ -449,7 +449,7 @@ class DmGrammar extends Grammar
         $table = $this->wrapTable($blueprint);
 
         $rs = [];
-        $rs[0] = 'alter table '.$table.' rename column '.$command->from.' to '.$command->to;
+        $rs[0] = 'alter table ' . $table . ' rename column ' . $command->from . ' to ' . $command->to;
 
         return (array) $rs;
     }
@@ -464,9 +464,10 @@ class DmGrammar extends Grammar
      */
     public function compileTableComment(Blueprint $blueprint, Fluent $command)
     {
-        return sprintf('COMMENT ON TABLE %s is %s',
+        return sprintf(
+            'COMMENT ON TABLE %s is %s',
             $this->wrapTable($blueprint),
-            "'".str_replace("'", "''", $command->comment)."'"
+            "'" . str_replace("'", "''", $command->comment) . "'"
         );
     }
 
@@ -672,7 +673,8 @@ class DmGrammar extends Grammar
      */
     protected function typeDateTime(Fluent $column)
     {
-        return 'datetime';
+        isset($column->precision) ?: $column->precision = 0;
+        return "datetime({$column->precision})";
     }
 
     /**
@@ -694,7 +696,8 @@ class DmGrammar extends Grammar
      */
     protected function typeTimestamp(Fluent $column)
     {
-        return 'timestamp';
+        isset($column->precision) ?: $column->precision = 0;
+        return "timestamp({$column->precision})";
     }
 
     /**
@@ -787,14 +790,14 @@ class DmGrammar extends Grammar
         $enum = '';
         if (count((array) $column->allowed)) {
             $columnName = $this->wrapValue($column->name);
-            $enum = " check ({$columnName} in ('".implode("', '", $column->allowed)."'))";
+            $enum = " check ({$columnName} in ('" . implode("', '", $column->allowed) . "'))";
         }
 
         $null = $column->nullable ? ' null' : ' not null';
         $null .= $enum;
 
         if (! is_null($column->default)) {
-            return ' default '.$this->getDefaultValue($column->default).$null;
+            return ' default ' . $this->getDefaultValue($column->default) . $null;
         }
 
         return $null;
